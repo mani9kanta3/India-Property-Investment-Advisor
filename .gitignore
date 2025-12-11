@@ -1,0 +1,43 @@
+# ---- Python virtual environments ----
+venv/
+.venv/
+env/
+ENV/
+
+# ---- Python cache ----
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# ---- Jupyter notebook checkpoints ----
+.ipynb_checkpoints/
+
+# ---- MLflow runs ----
+mlruns/
+
+# ---- Big data folders (DO NOT upload to GitHub) ----
+data/
+*.csv
+*.xlsx
+
+# ---- Model training intermediate outputs ----
+*.pkl
+*.joblib
+
+# (But keep these two specific model files)
+!models/classifier_pipeline.pkl
+!models/regression_pipeline.pkl
+
+# ---- IDE & System Files ----
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# ---- Logs ----
+logs/
+*.log
+
+# ---- Streamlit Cache ----
+.streamlit/
