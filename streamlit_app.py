@@ -1,8 +1,42 @@
 import math
 
 import streamlit as st
+import joblib
+from pathlib import Path
 
-from src.models.predict import predict_property_investment
+# -------------------------------------------------------
+# Load models safely for Streamlit Cloud
+# -------------------------------------------------------
+@st.cache_resource
+def load_models():
+    root = Path(__file__).parent
+    clf = joblib.load(root / "models" / "classifier_pipeline.pkl")
+    reg = joblib.load(root / "models" / "regression_pipeline.pkl")
+    return clf, reg
+
+clf_model, reg_model = load_models()
+
+
+# -------------------------------------------------------
+# Prediction helper function
+# -------------------------------------------------------
+def predict_property_investment(model_clf, model_reg, features):
+    """features = dict of input values"""
+    
+    import pandas as pd
+    
+    df = pd.DataFrame([features])
+
+    proba = model_clf.predict_proba(df)[0, 1]
+    label = int(proba > 0.5)
+
+    price_pred = model_reg.predict(df)[0]
+
+    return {
+        "good_investment_label": label,
+        "good_investment_prob": float(proba),
+        "predicted_price_lakhs": float(price_pred)
+    }
 
 
 # --------------------------------------------------
