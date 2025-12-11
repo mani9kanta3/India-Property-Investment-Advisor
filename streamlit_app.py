@@ -137,7 +137,7 @@ def main():
         }
 
         try:
-            result = predict_property_investment(features)
+            result = predict_property_investment(clf_model, reg_model, features)
         except Exception as e:
             st.error(f"Prediction failed: {e}")
             return
