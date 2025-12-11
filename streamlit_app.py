@@ -22,7 +22,6 @@ def main():
     )
 
     st.title("🏠 India Property Investment Advisor")
-    st.caption("Backed by ML classification + price regression models")
 
     st.markdown("---")
 
