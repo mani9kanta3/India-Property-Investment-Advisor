@@ -2,7 +2,7 @@
 
 **ML-powered Real-Estate Valuation & Investment Decision App for Indian Markets**
 
-[🔗 Live App](https://india-property-investment-advisor-b92jl6bujsgofhqemuy3ra.streamlit.app/)
+[🔗 Live App](https://india-property-investment-advisor.streamlit.app/)
 
 ---
 
@@ -201,3 +201,4 @@ streamlit run streamlit_app.py
 **Manikanta Pudi**  
 _Data Analyst_  
 🔗 GitHub: [mani9kanta3](https://github.com/mani9kanta3)
+
