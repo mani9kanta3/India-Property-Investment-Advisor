@@ -1,6 +1,8 @@
+
+
 # 🏠 India Property Investment Advisor
 
-**ML-powered Real-Estate Valuation & Investment Decision App for Indian Markets**
+**ML-powered Real Estate Valuation & Investment Decision Platform for Indian Markets**
 
 [🔗 Live App](https://india-property-investment-advisor.streamlit.app/)
 
@@ -8,11 +10,12 @@
 
 ## 📌 Table of Contents
 
-- [Introduction](#introduction)
+- [Overview](#overview)
 - [Problem Statement](#problem-statement)
 - [Data Overview](#data-overview)
-- [Modeling](#modeling)
-- [App Features](#app-features)
+- [Modeling Approach](#modeling-approach)
+- [Application Features](#application-features)
+- [Insights Dashboard](#insights-dashboard)
 - [How to Use (Non-Technical Users)](#how-to-use-non-technical-users)
 - [Project Structure](#project-structure)
 - [Installation & Running Locally](#installation--running-locally)
@@ -21,121 +24,158 @@
 
 ---
 
-## 🧠 Introduction
+## 🧠 Overview
 
-This project enables **homebuyers and investors in India** to make **data-driven property investment decisions**. With machine learning models under the hood and a sleek **Streamlit** UI, the app instantly tells users whether a listing is a **GOOD** investment or **RISKY**, and estimates a **fair market price**.
+**India Property Investment Advisor** is an end-to-end **machine learning–driven decision support system** that helps homebuyers and real estate investors evaluate whether a property listing is a **GOOD investment** or **RISKY**, and estimates its **fair market value**.
 
-It brings transparency, valuation intelligence, and investment foresight to the chaotic Indian real estate market.
+The project combines:
+- Predictive modeling
+- Business-driven feature engineering
+- An interactive **Streamlit application**
+- A full **market insights dashboard**
+
+to bring transparency and data-backed intelligence to Indian real estate decisions.
 
 ---
 
 ## 🚨 Problem Statement
 
-Property buyers in India often face:
-
+Real estate decisions in India are often driven by:
+- ❌ Emotional judgment
 - ❌ Overpriced listings
-- ❌ Poor understanding of locality quality
-- ❌ No objective way to assess deal quality
-- ❌ Uncertainty in future appreciation
+- ❌ Lack of locality-level insights
+- ❌ No objective way to assess investment quality
 
-**This app solves that by offering:**
-
-✔ Fair price prediction  
-✔ Investment quality classification  
-✔ Growth-based projection  
-✔ Clear verdict: **GOOD** or **RISKY**
+### This project addresses these gaps by providing:
+- ✔ Fair price estimation
+- ✔ Investment quality classification
+- ✔ Over / under-valuation analysis
+- ✔ Data-backed market insights
+- ✔ Clear, explainable outputs for non-technical users
 
 ---
 
 ## 📊 Data Overview
 
-The app uses a **synthetic real-estate dataset** with **250,000 records**, including:
+The application is built on a **synthetic real estate dataset with 250,000 property records**, designed to reflect realistic Indian market behavior.
 
-| Feature                  | Description                                |
-|--------------------------|--------------------------------------------|
-| City, Locality           | Location indicators                        |
-| Property Type            | Apartment / House / Villa                  |
-| BHK, Size (SqFt)         | Property configuration                     |
-| Age of Property          | In years                                   |
-| Nearby Schools/Hospitals | Infra & accessibility metrics              |
-| Asking Price (Lakhs)     | Seller's price                             |
-| Score (0–7)              | Derived investment quality score           |
-| Good_Investment          | Target label: 1 = Good, 0 = Risky          |
+### Key Features
 
-**Label Distribution**  
-- ✅ Good Investment: **27%**  
-- ⚠️ Risky Investment: **73%**  
-(Realistic—most Indian listings are overpriced)
+| Feature                  | Description |
+|--------------------------|-------------|
+| City, Locality           | Location indicators |
+| Property_Type            | Apartment / Independent House / Villa |
+| BHK, Size_in_SqFt        | Property configuration |
+| Age_of_Property          | Property age (years) |
+| Nearby_Schools           | Schools within 5 km |
+| Nearby_Hospitals         | Hospitals within 5 km |
+| Price_in_Lakhs           | Asking price |
+| Score (0–7)              | Derived investment quality score |
+| Good_Investment          | Target label (1 = Good, 0 = Risky) |
+
+### Label Distribution
+
+- ✅ **Good Investment:** ~27%
+- ⚠️ **Risky Investment:** ~73%
+
+> This skew reflects real-world markets where most listings are not optimal investment opportunities.
 
 ---
 
-## 🤖 Modeling
+## 🤖 Modeling Approach
 
-### 1️⃣ Classification Model
+### 1️⃣ Investment Classification Model
 
-- **Goal:** Predict if the property is a good investment.
-- **Model:** Logistic Regression  
+- **Objective:** Predict whether a property is a *good investment*
+- **Model:** Logistic Regression
 - **Pipeline Includes:**
-  - One-Hot Encoding
-  - Standard Scaling
-  - Class balancing
-- **Performance:**
+  - One-hot encoding for categorical features
+  - Feature scaling
+  - Class imbalance handling
+- **Performance Metrics:**
   - Accuracy: ~90%
   - ROC-AUC: ~0.93
   - F1-Score: ~0.84
 
-### 2️⃣ Regression Model
+---
 
-- **Goal:** Predict the fair market price (Lakhs).
+### 2️⃣ Price Valuation Model
+
+- **Objective:** Estimate fair market price (₹ Lakhs)
 - **Model:** Random Forest Regressor
-- **Performance:**
-  - MSE: ~1.27
-  - RMSE: ~1.12
-  - MAE: ~0.80 Lakhs (~₹80,000 error)
-  - R²: 0.9999
+- **Performance Metrics:**
+  - RMSE: ~1.12 Lakhs
+  - MAE: ~0.80 Lakhs
+  - R² Score: ~0.999
+
+> Both models are saved as reusable pipelines and loaded directly into the Streamlit app.
 
 ---
 
-## 🖥️ App Features
+## 🖥️ Application Features
 
-Users input:
+### 🔹 Property Evaluation (Prediction App)
 
-- Location, BHK, Size, Age
-- Property Type
-- Nearby Schools & Hospitals
+Users can input:
+- City & Locality
+- Property Type, BHK, Size
+- Age of Property
+- Nearby Infrastructure
 - Asking Price
-- Growth Rate & Horizon
+- Growth Rate & Investment Horizon
 
-The app outputs:
+**Outputs:**
+- ✅ Investment Verdict (GOOD / RISKY)
+- 📊 Probability of being a good investment
+- 💰 Model-estimated fair price
+- 📉 Over / Under-valuation explanation
+- 📈 Growth-based future price projection
+- 🔍 Optional debug view of model inputs
 
-- **🏷 Investment Verdict**: GOOD or RISKY
-- **📊 Probability** of being a good investment
-- **💰 Fair Market Price**
-- **📉 Over/Under Value Explanation**
-- **📈 5-Year Value Projection**
-- **🔍 Debug View** of input processing (optional)
+---
+
+## 📊 Insights Dashboard
+
+A dedicated **Insights Dashboard** built using the **full dataset (250k rows)** provides market-level intelligence:
+
+### Dashboard Highlights
+- Average property prices (₹ Lakhs)
+- Average price per SqFt
+- Good investment rate
+- Listings count
+- Price distribution
+- City-wise price analysis
+- Property type distribution
+- Investment quality by city & property type
+
+### Interactive Filters
+- City (All / specific)
+- Property Type (All / selected)
+- BHK
+- Price range
+- Size range
+- Age of property
+- Toggle: *Show only good investments*
+
+This dashboard helps users and stakeholders **understand patterns**, not just individual predictions.
 
 ---
 
 ## 🕹️ How to Use (Non-Technical Users)
 
-1. **Enter city and locality**  
-   Example: `"Hyderabad – Madhapur"`
-
-2. **Fill in property details**  
-   → BHK, SqFt, Age, Property Type
-
-3. **Enter nearby infra details**  
-   → Schools, hospitals (higher = better)
-
-4. **Set asking price**  
-   → App compares it to fair value
-
-5. **Adjust growth assumptions**  
-   → For long-term projections
-
-6. **Click “Evaluate Investment 🚀”**  
-   → Get instant verdict, value insights & growth forecast
+1. Open the **Live App**
+2. Enter property details:
+   - City & locality
+   - BHK, size, age
+3. Add nearby infrastructure details
+4. Enter asking price
+5. Adjust growth assumptions if needed
+6. Click **“Evaluate Investment 🚀”**
+7. Review:
+   - Investment verdict
+   - Fair price
+   - Over / under-valuation insight
+8. Switch to **Insights Dashboard** for market trends
 
 ---
 
@@ -147,6 +187,7 @@ India_Property_Investment_Advisor/
 ├── data/
 │   ├── raw/
 │   └── processed/
+│       └── india_housing_with_targets.csv
 │
 ├── src/
 │   ├── data/
@@ -155,16 +196,18 @@ India_Property_Investment_Advisor/
 │   │   ├── train_classification.py
 │   │   ├── train_regression.py
 │   │   ├── predict.py
-│   │   └── saved pipelines (.pkl)
-│   └── app/
-│       └── streamlit_app.py
 │
 ├── models/
+│   ├── classifier_pipeline.pkl
+│   └── regression_pipeline.pkl
+│
+├── pages/
+│   └── 01_Property_Market_Insights.py
+│
+├── Property_Investment_Advisor.py
 ├── requirements.txt
-├── streamlit_app.py
 └── README.md
 ```
-
 ---
 
 ## 🚀 Installation & Running Locally
@@ -185,7 +228,7 @@ pip install -r requirements.txt
 ### 3. Launch the Streamlit App
 
 ```bash
-streamlit run streamlit_app.py
+streamlit run Property_Investment_Advisor.py
 ```
 
 ## 🌟 Future Improvements
@@ -201,4 +244,5 @@ streamlit run streamlit_app.py
 **Manikanta Pudi**  
 _Data Analyst_  
 🔗 GitHub: [mani9kanta3](https://github.com/mani9kanta3)
+
 
