@@ -16,10 +16,10 @@ __pycache__/
 # ---- MLflow runs ----
 mlruns/
 
-# ---- Big data folders (DO NOT upload to GitHub) ----
-data/
-*.csv
-*.xlsx
+# # ---- Big data folders  ----
+# data/
+# *.csv
+# *.xlsx
 
 # ---- Model training intermediate outputs ----
 *.pkl
